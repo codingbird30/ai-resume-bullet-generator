@@ -1,0 +1,50 @@
+.dark-mode {
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Tailwind CSS Imports */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Animations */
+@keyframes slide-in {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animation-slide {
+    animation: slide-in 0.5s ease-in-out;
+}
+
+/* Custom Styles for Resume Bullet Generator */
+.bullet {
+    position: relative;
+    padding-left: 1.25rem;
+}
+
+.bullet::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #4c51bf; /* Tailwind color-blue-700 */
+}
+
+.bullet-generator {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

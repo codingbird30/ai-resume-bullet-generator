@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced AI Resume Bullet Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>AI Resume Bullet Generator</h1>
+        <select id="role-selector">
+            <option value="software-engineer">Software Engineer</option>
+            <option value="product-manager">Product Manager</option>
+            <option value="data-analyst">Data Analyst</option>
+            <option value="marketing-manager">Marketing Manager</option>
+            <option value="sales-representative">Sales Representative</option>
+            <option value="hr-manager">HR Manager</option>
+        </select>
+        <button id="load-template">Load Template</button>
+    </header>
+    <main>
+        <div id="generated-bullets">
+            <h2>Generated Bullet Points</h2>
+            <ul id="bullet-list"></ul>
+            <p id="bullet-counter">Bullet Count: <span id="count">0</span></p>
+        </div>
+        <div>
+            <textarea id="bullet-input" placeholder="Type your bullet point here..."></textarea>
+            <button id="copy-btn">Copy All</button>
+            <button id="delete-btn">Delete Selected</button>
+        </div>
+    </main>
+    <footer>
+        <button id="toggle-dark-mode">Toggle Dark Mode</button>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+
+// JavaScript (script.js)
+const templates = {
+    "software-engineer": [
+        "Developed a scalable application using JavaScript and Node.js.",
+        "Optimized system performance, resulting in a 30% increase in speed."
+    ],
+    "product-manager": [
+        "Led a cross-functional team to deliver a product that increased market share by 20%.",
+        "Conducted user research that improved customer satisfaction scores by 15%."
+    ],
+    "data-analyst": [
+        "Analyzed data trends to identify efficiencies, saving the company $50,000 annually.",
+        "Developed a dashboard that increased departmental productivity by 25%."
+    ],
+    "marketing-manager": [
+        "Created a marketing campaign that resulted in a 40% increase in engagement.",
+        "Managed a budget of $100,000 for an online advertising initiative."
+    ],
+    "sales-representative": [
+        "Exceeded sales targets by 25% through strategic relationship building.",
+        "Implemented a CRM system that improved follow-up efficiency by 35%."
+    ],
+    "hr-manager": [
+        "Implemented a new employee onboarding process that reduced ramp-up time by 50%.",
+        "Led a diversity initiative that improved workforce representation by 15%."
+    ]
+};
+
+document.getElementById('load-template').onclick = function() {
+    const role = document.getElementById('role-selector').value;
+    const bulletList = document.getElementById('bullet-list');
+    bulletList.innerHTML = '';
+    templates[role].forEach(bullet => {
+        const li = document.createElement('li');
+        li.textContent = bullet;
+        bulletList.appendChild(li);
+    });
+    updateBulletCount();
+};
+
+function updateBulletCount() {
+    const count = document.getElementById('bullet-list').children.length;
+    document.getElementById('count').textContent = count;
+}
+
+document.getElementById('copy-btn').onclick = function() {
+    const bullets = Array.from(document.querySelectorAll('#bullet-list li')).map(li => li.textContent);
+    navigator.clipboard.writeText(bullets.join('\n')).then(() => {
+        alert('All bullets copied to clipboard!');
+    });
+};
+
+document.getElementById('delete-btn').onclick = function() {
+    const bulletList = document.getElementById('bullet-list');
+    bulletList.querySelectorAll('li').forEach(li => {
+        if (li.classList.contains('selected')) {
+            bulletList.removeChild(li);
+        }
+    });
+    updateBulletCount();
+};
+
+document.getElementById('toggle-dark-mode').onclick = function() {
+    document.body.classList.toggle('dark-mode');
+};
+
+window.onload = function() {
+    if (localStorage.getItem('bullets')) {
+        const savedBullets = JSON.parse(localStorage.getItem('bullets'));
+        const bulletList = document.getElementById('bullet-list');
+        savedBullets.forEach(bullet => {
+            const li = document.createElement('li');
+            li.textContent = bullet;
+            bulletList.appendChild(li);
+        });
+        updateBulletCount();
+    }
+};
