@@ -1,1 +1,32 @@
-{\n  "name": "ai-resume-bullet-generator",\n  "version": "1.0.0",\n  "description": "A resume bullet generator app using React and Tailwind CSS",\n  "main": "index.js",\n  "scripts": {\n    "start": "react-scripts start",\n    "build": "react-scripts build",\n    "test": "react-scripts test",\n    "eject": "react-scripts eject"\n  },\n  "dependencies": {\n    "react": "^18.0.0",\n    "react-dom": "^18.0.0",\n    "react-scripts": "^5.0.0",\n    "tailwindcss": "^2.2.19",\n    "postcss": "^8.4.9",\n    "autoprefixer": "^10.4.8"\n  },\n  "devDependencies": {},\n  "keywords": [],\n  "author": "codingbird30",\n  "license": "ISC"\n}
+{
+  "name": "ai-resume-bullet-generator",
+  "version": "2.0.0",
+  "description": "An AI-powered resume bullet generator built with React, Vite, and the Anthropic Claude API.",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n server,client -c blue,magenta \"npm:server\" \"npm:client\"",
+    "server": "node server/index.js",
+    "client": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.90.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "vite": "^6.0.7"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "author": "codingbird30",
+  "license": "MIT"
+}
